@@ -43,7 +43,7 @@ public class NestedIteratorTests {
     }
 
     @Test
-    public void testEmpty() {
+    public void testEmptyLists() {
 
         NestedIterator<Integer> nested = new NestedIterator<>(
                 new ArrayList<Integer>().iterator(),
@@ -53,6 +53,20 @@ public class NestedIteratorTests {
         List<Integer> results = new ArrayList<>();
         while(nested.hasNext()) {
             results.add(nested.next());
+        }
+
+        Assert.assertEquals(Collections.emptyList(), results);
+
+    }
+
+    @Test
+    public void testAllEmpty() {
+
+        NestedIterator<Integer> nested2 = new NestedIterator<>();
+
+        List<Integer> results = new ArrayList<>();
+        while(nested2.hasNext()) {
+            results.add(nested2.next());
         }
 
         Assert.assertEquals(Collections.emptyList(), results);

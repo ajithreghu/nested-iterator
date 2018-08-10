@@ -35,17 +35,19 @@ public class NestedIterator<T> implements Iterator<T> {
 
         if(mustRecomputeIndex) {
 
-            int nextIndex = (currIndex + 1) % itrList.size();
-
-            while (!itrList.isEmpty()) {
-                if (itrList.get(nextIndex).hasNext()) {
-                   break;
+            if(!itrList.isEmpty()) {
+                int nextIndex = (currIndex + 1) % itrList.size();
+                while (!itrList.isEmpty()) {
+                    if (itrList.get(nextIndex).hasNext()) {
+                        break;
+                    }
+                    itrList.remove(nextIndex);
                 }
-                itrList.remove(nextIndex);
+
+                currIndex = nextIndex;
+                mustRecomputeIndex = false;
             }
 
-            currIndex = nextIndex;
-            mustRecomputeIndex = false;
             return !itrList.isEmpty();
 
         } else {
