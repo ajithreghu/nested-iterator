@@ -13,7 +13,6 @@ public class NestedIterator<T> implements Iterator<T> {
         if(iterators != null) {
             itrList.addAll(Arrays.asList(iterators));
         }
-        //One could create a copy of the input args as the original list will be modified.
     }
 
     /**
