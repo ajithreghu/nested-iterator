@@ -33,26 +33,27 @@ public class NestedIterator<T> implements Iterator<T> {
     @Override
     public boolean hasNext() {
 
+        if(itrList.isEmpty()) {
+            return false;
+        }
+
         if(mustRecomputeIndex) {
 
-            if(!itrList.isEmpty()) {
-                int nextIndex = (currIndex + 1) % itrList.size();
-                while (!itrList.isEmpty()) {
-                    if (itrList.get(nextIndex).hasNext()) {
-                        break;
-                    }
-                    itrList.remove(nextIndex);
+            int nextIndex = (currIndex + 1) % itrList.size();
+            while (!itrList.isEmpty()) {
+                if (itrList.get(nextIndex).hasNext()) {
+                    break;
                 }
-
-                currIndex = nextIndex;
-                mustRecomputeIndex = false;
+                itrList.remove(nextIndex);
             }
 
+            currIndex = nextIndex;
+            mustRecomputeIndex = false;
             return !itrList.isEmpty();
 
         } else {
 
-            return !itrList.isEmpty() && itrList.get(currIndex).hasNext();
+            return itrList.get(currIndex).hasNext();
 
         }
     }
